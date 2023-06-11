@@ -37,17 +37,17 @@ $(function() {
 
     /* 有参数，启动教程 */
     if(!!query) {
-        $tips.html('让我来教你正确的打开方式');
+        $tips.html('    ');
         $stop.fadeIn();
 
         stepTimeout = setTimeout(function() {
-            $tips.html('1、找到输入框并选中');
+            $tips.html('1. Arama kutusuna basın');
 
             $arrow.removeClass('active').show().animate({
                 left: $kw.offset().left + 20 + 'px',
                 top: ($kw.offset().top + $kw.outerHeight() / 2) + 'px'
             }, 2000, function () {
-                $tips.html('2、输入你要找的内容');
+                $tips.html('2. Sorunuzu Yazın');
                 $arrow.addClass('active');
 
                 stepTimeout = setTimeout(function() {
@@ -58,20 +58,18 @@ $(function() {
                         $kw.val(query.substr(0, i));
                         if (++i > query.length) {
                             clearInterval(typeInterval);
-                            $tips.html('3、点击下“Google 搜索”按钮');
+                            $tips.html('3. "Google Arama"ya basın');
 
                             $arrow.removeClass('active').fadeIn().animate({
                                 left: $searchSubmit.offset().left + $searchSubmit.width()  / 2 + 'px',
                                 top:  $searchSubmit.offset().top  + $searchSubmit.height() / 2 + 'px'
                             }, 1000, function () {
-                                $tips.html('<strong>怎么样，学会了吗？</strong>');
+                                $tips.html('<strong>Tek yapman gereken buydu.</strong>');
                                 $arrow.addClass('active');
 
                                 stepTimeout = setTimeout(function () {
                                     if ($(".search-text").attr("data-site") == "google") {
-                                        window.location = 'https://www.google.com.hk/search?q=' + encodeURIComponent(query);
-                                    } else {
-                                        window.location = 'https://www.loli.cab/search?q=' + encodeURIComponent(query);
+                                        window.location = 'https://www.google.com.tr/search?q=' + encodeURIComponent(query);
                                     }
                                 }, 1000);
                             });
@@ -90,7 +88,7 @@ $(function() {
         $arrow.stop().hide();
         $kw.val(query);
         query = false;
-        $tips.html('输入一个问题，然后按 Google 搜索');
+        $tips.html('Bir soru girin ve Google Arama\'ya basın');
     });
 
     /* 提交 */
@@ -99,10 +97,10 @@ $(function() {
 
         var question = $.trim($kw.val());
         if(!question) {
-            $tips.html('<span style="color: red">搜了个寂寞？</span>');
+            $tips.html('<span style="color: red">Arama çubuğu boş.</span>');
             $kw.val('');
         } else {
-            $tips.html('↓↓↓ 复制下面的链接，教伸手党使用谷歌');
+            $tips.html('Aşağıdaki bağlantıyı arama yapmasını bilmeyenlere ulaştır.');
             $('#output').fadeIn();
             $urlOutput.val(window.location.origin + window.location.pathname + '?q=' + Base64.encode(question)).focus().select();
         }
@@ -112,10 +110,10 @@ $(function() {
     /* 复制结果 */ 
     var clipboard = new ClipboardJS('[data-clipboard-target]');
     clipboard.on('success', function(e) {
-        $tips.html('<span style="color: #4caf50">复制成功! 赶紧把链接甩给伸手党们!</span>');
+        $tips.html('<span style="color: #4caf50">Kopyalandı.</span>');
     });
     clipboard.on('error', function(e) {
-        $tips.html('<span style="color: red">复制失败，请手动复制</span>');
+        $tips.html('<span style="color: red">Kopyalanamadı. Lütfen elle kopyalayın.</span>');
     });
 
     /* 预览 */ 
@@ -129,9 +127,7 @@ $(function() {
     /* 手气不错 */ 
     $('#search2').on('click', function(){
         if ($(".search-text").attr("data-site") == "google") {
-            window.location = 'https://www.google.com.hk/search?q=' + encodeURIComponent($('#kw').val());
-        } else {
-            window.location = 'https://www.loli.cab/search?q=' + encodeURIComponent($('#kw').val());
+            window.location = 'https://www.google.com.tr/search?q=' + encodeURIComponent($('#kw').val());
         }
     });
 });
@@ -165,6 +161,6 @@ function gtest(){
         clearTimeout(timeout);
         $(".search-text").attr("data-site","google");
     };
-    img.src = "https://www.google.com.hk/favicon.ico?"+ +new Date();
+    img.src = "https://www.google.com.tr/favicon.ico?"+ +new Date();
 }
 window.onload = function(){gtest();window.setInterval("gtest()",10000);}
